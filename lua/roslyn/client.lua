@@ -106,20 +106,20 @@ function M.spawn(cmd, target, settings, on_exit, on_attach, capabilities)
 				["solution"] = target_uri,
 			})
 		end,
-		on_attach = vim.schedule_wrap(function(client, bufnr)
-			on_attach(client, bufnr)
+		-- on_attach = vim.schedule_wrap(function(client, bufnr)
+		-- 	on_attach(client, bufnr)
 
-			-- vim.api.nvim_buf_attach(bufnr, false, {
-			--     on_lines = function(_, bufnr, changedtick, firstline, lastline, new_lastline)
-			--         -- we are only interested in one character insertions
-			--         if firstline ~= lastline or new_lastline ~= lastline then
-			--             return
-			--         end
-			--
-			--         -- https://github.com/dotnet/vscode-csharp/blob/main/src/lsptoolshost/onAutoInsert.ts
-			--     end,
-			-- })
-		end),
+		-- 	-- vim.api.nvim_buf_attach(bufnr, false, {
+		-- 	--     on_lines = function(_, bufnr, changedtick, firstline, lastline, new_lastline)
+		-- 	--         -- we are only interested in one character insertions
+		-- 	--         if firstline ~= lastline or new_lastline ~= lastline then
+		-- 	--             return
+		-- 	--         end
+		-- 	--
+		-- 	--         -- https://github.com/dotnet/vscode-csharp/blob/main/src/lsptoolshost/onAutoInsert.ts
+		-- 	--     end,
+		-- 	-- })
+		-- end),
 		handlers = {
 			[vim.lsp.protocol.Methods.textDocument_publishDiagnostics] = hacks.with_fixed_diagnostics_tags(
 				vim.lsp.handlers[vim.lsp.protocol.Methods.textDocument_publishDiagnostics]
